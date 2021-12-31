@@ -4,8 +4,6 @@ import getWeb3 from "./utils/getWeb3";
 
 import DocuWallet from "./contracts/DocuWallet.json";
 
-import "./App.css";
-
 function App() {
   const [web3, setWeb3] = useState(null);
   const [accounts, setAccounts] = useState(null);
@@ -46,7 +44,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div>
       hello
     </div>
   );
