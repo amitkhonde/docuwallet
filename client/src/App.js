@@ -4,6 +4,9 @@ import getWeb3 from "./utils/getWeb3";
 
 import DocuWallet from "./contracts/DocuWallet.json";
 
+import Loader from './components/Loader';
+import PropertyControlledComponent from './components/PropertyControlledComponent';
+
 function App() {
   const [web3, setWeb3] = useState(null);
   const [accounts, setAccounts] = useState(null);
@@ -38,14 +41,11 @@ function App() {
     initApp();
   }, []);
 
-
-  if (isLoading) {
-    return <div>Loading Web3, accounts, and contract...</div>;
-  }
-
   return (
-    <div>
-      hello
+    <div className="app-container background-primary">
+      <PropertyControlledComponent controllerProperty={isLoading}>
+        <Loader containerClassName="global-loader-container" />
+      </PropertyControlledComponent>
     </div>
   );
 }
