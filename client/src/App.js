@@ -4,8 +4,9 @@ import getWeb3 from "./utils/getWeb3";
 
 import DocuWallet from "./contracts/DocuWallet.json";
 
-import Loader from './components/Loader';
-import PropertyControlledComponent from './components/PropertyControlledComponent';
+import Loader from "./components/Loader";
+import PropertyControlledComponent from "./components/PropertyControlledComponent";
+import Error from './components/Error';
 
 function App() {
   const [web3, setWeb3] = useState(null);
@@ -26,11 +27,11 @@ function App() {
         const deployedNetwork = DocuWallet.networks[networkId];
         const contractInstance = new web3Instance.eth.Contract(
           DocuWallet.abi,
-          deployedNetwork && deployedNetwork.address,
+          deployedNetwork && deployedNetwork.address
         );
         setContract(contractInstance);
         setIsWeb3Error(false);
-      } catch(err) {
+      } catch (err) {
         console.error(err);
         setIsWeb3Error(true);
       } finally {
@@ -43,8 +44,13 @@ function App() {
 
   return (
     <div className="app-container background-primary">
-      <PropertyControlledComponent controllerProperty={isLoading}>
-        <Loader containerClassName="global-loader-container" />
+      <PropertyControlledComponent controllerProperty={isWeb3Error}>
+        <Error message="There was an error connecting to web3. Please check if you are connected to Metamask or using the correct browser!" />
+      </PropertyControlledComponent>
+      <PropertyControlledComponent controllerProperty={!isWeb3Error}>
+        <PropertyControlledComponent controllerProperty={isLoading}>
+          <Loader containerClassName="global-loader-container" />
+        </PropertyControlledComponent>
       </PropertyControlledComponent>
     </div>
   );
