@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.app-container {
+  height: 100vh;
+  width: 100%;
+  color: white;
+}
+
+.background-primary {
+  background-color: #181A1F;
+}
+
+.background-secondary {
+  background-color: #272A33;
+}
+
+.global-loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+}

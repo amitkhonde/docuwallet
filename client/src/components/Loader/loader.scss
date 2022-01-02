@@ -1,0 +1,26 @@
+.loader-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: transparent;
+  z-index: 1;
+}
+
+.loader {
+  width: 12px;
+  height: 12px;
+  background: #346EF4;
+  border-radius: 50%;
+  box-shadow: 20px 0 #346EF422,-20px 0 #346EF4;
+  animation: loaderAnimation 1s infinite linear alternate;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes loaderAnimation {
+    0% {box-shadow: 20px 0 #346EF4,-20px 0 #346EF422;background: #346EF4}
+    33%{box-shadow: 20px 0 #346EF4,-20px 0 #346EF422;background: #346EF422}
+    66%{box-shadow: 20px 0 #346EF422,-20px 0 #346EF4;background: #346EF422}
+}
