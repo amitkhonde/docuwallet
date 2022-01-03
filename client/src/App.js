@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 
 import getWeb3 from "./utils/getWeb3";
 
 import DocuWallet from "./contracts/DocuWallet.json";
 
+// Pages
+import Dashboard from './pages/Dashboard';
+
+// Components
 import Loader from "./components/Loader";
 import PropertyControlledComponent from "./components/PropertyControlledComponent";
 import Error from './components/Error';
+
+// Contexts
+import ContractContext from './contexts/ContractContext';
 
 function App() {
   const [web3, setWeb3] = useState(null);
@@ -43,16 +50,19 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container background-primary">
-      <PropertyControlledComponent controllerProperty={isWeb3Error}>
-        <Error message="There was an error connecting to web3. Please check if you are connected to Metamask or using the correct browser!" />
-      </PropertyControlledComponent>
-      <PropertyControlledComponent controllerProperty={!isWeb3Error}>
-        <PropertyControlledComponent controllerProperty={isLoading}>
-          <Loader containerClassName="global-loader-container" />
+    <ContractContext.Provider value={{ contract }}>
+      <div className="app-container background-primary">
+        <PropertyControlledComponent controllerProperty={isWeb3Error}>
+          <Error message="There was an error connecting to web3. Please check if you are connected to Metamask or using the correct browser!" />
         </PropertyControlledComponent>
-      </PropertyControlledComponent>
-    </div>
+        <PropertyControlledComponent controllerProperty={!isWeb3Error}>
+          <PropertyControlledComponent controllerProperty={isLoading}>
+            <Loader containerClassName="global-loader-container" />
+          </PropertyControlledComponent>
+          <Dashboard />
+        </PropertyControlledComponent>
+      </div>
+    </ContractContext.Provider>
   );
 }
 
